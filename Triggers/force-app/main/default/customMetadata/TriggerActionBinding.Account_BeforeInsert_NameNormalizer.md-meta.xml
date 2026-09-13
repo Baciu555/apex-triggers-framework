@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" fullName="TriggerActionBinding.Account_BeforeInsert_NameNormalizer">
+    <label>Account Before Insert - Name Normalizer</label>
+    <protected>false</protected>
+    <values>
+        <field>SObject_API_Name__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+    <values>
+        <field>Trigger_Context__c</field>
+        <value xsi:type="xsd:string">BEFORE_INSERT</value>
+    </values>
+    <values>
+        <field>Apex_Class_Name__c</field>
+        <value xsi:type="xsd:string">AccountNameNormalizer</value>
+    </values>
+    <values>
+        <field>Order__c</field>
+        <value xsi:type="xsd:double">10.0</value>
+    </values>
+    <values>
+        <field>Is_Disabled__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">Owned by "Package A" - trims Account.Name before save.</value>
+    </values>
+</CustomMetadata>

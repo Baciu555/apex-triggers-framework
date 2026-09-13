@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description__c</fullName>
+    <description>Free-text note on what this handler does and which package or feature owns it - the registry is shared across packages, so this is often the only place that ownership is written down.</description>
+    <label>Description</label>
+    <length>255</length>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bypass_Permission__c</fullName>
+    <description>API name of a Custom Permission that suppresses this one binding for any user who holds it, e.g. Bypass_Trigger_Actions. Unlike Is Disabled, this is assignable at runtime via a permission set, so an integration user or a data load can skip this handler without a metadata deployment. Leave blank for no permission-based bypass. For a permission owned by another package, include its namespace.</description>
+    <label>Bypass Permission</label>
+    <length>255</length>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

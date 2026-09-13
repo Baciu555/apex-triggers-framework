@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apex_Class_Name__c</fullName>
+    <description>Name of the handler class TriggerActionDispatcher should instantiate via Type.forName(), e.g. AccountNameNormalizer. For a class contributed by another installed package, include its namespace, e.g. pkgA.AccountNameNormalizer.</description>
+    <label>Apex Class Name</label>
+    <length>255</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

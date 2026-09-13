@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Trigger Action Bypass</label>
+    <description>Assign to a data-loading or integration user who must save records with every TriggerActionDispatcher handler skipped. Runtime alternative to Is_Disabled__c, which needs a deployment. On a regular user it disables all trigger automation.</description>
+    <hasActivationRequired>true</hasActivationRequired>
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>Bypass_Trigger_Actions</name>
+    </customPermissions>
+</PermissionSet>

@@ -135,14 +135,12 @@ removes it.
 
 ## Deploying
 
-Custom metadata **types** and their **records** cannot be created in the same
-deploy — the records validate against a type that doesn't exist yet, and the
-Metadata API reports this as a bare `UNKNOWN_EXCEPTION` with no component
-errors, which is not a helpful thing to debug from scratch. Deploy in two
-passes into a fresh org:
+Deploy the code and the custom metadata **type** first, and the binding
+**records** second. A type and its records cannot be created in one deploy —
+the records validate against a type that does not exist yet.
 
 ```sh
-# 1. the type, the fields, the Apex, the permission set
+# 1. the type, the fields, the Apex, the permissions
 sf project deploy start \
   --source-dir force-app/main/default/objects \
   --source-dir force-app/main/default/classes \
@@ -154,7 +152,38 @@ sf project deploy start \
 sf project deploy start --source-dir force-app/main/default/customMetadata
 ```
 
-Once the type exists, ordinary full-directory deploys work.
+### If step 2 fails with UNKNOWN_EXCEPTION
+
+Some orgs reject the record deploy with
+
+```
+UNKNOWN_EXCEPTION: An unexpected error occurred. Please include this ErrorId ...
+```
+
+and **zero component errors**, which gives you nothing to work from. It is not
+the record contents: this reproduces with a single minimal record containing
+only the required fields, with and without a `fullName` attribute, at API
+versions 62.0 and 67.0, with and without a namespace in `sfdx-project.json`,
+and after the type is confirmed present and correctly described in the org.
+
+Use the Apex Metadata API instead, which is a different code path and works:
+
+```sh
+sf apex run --file scripts/apex/deployTriggerActionBindings.apex
+```
+
+That deployment is asynchronous — the records appear a few seconds later.
+Confirm with:
+
+```sh
+sf data query --query "SELECT DeveloperName, Apex_Class_Name__c, Trigger_Context__c, Order__c FROM TriggerActionBinding__mdt ORDER BY DeveloperName"
+```
+
+`force-app/main/default/customMetadata/` remains the source of truth; the script
+is only a way to get it into an org, so keep the two in sync.
+
+Once the type and records exist, ordinary full-directory deploys work for
+everything else.
 
 ## Two frameworks live here
 

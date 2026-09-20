@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <isLicensed>false</isLicensed>
+    <label>Bypass Trigger Actions</label>
+    <description>Skips every TriggerActionBinding__mdt handler for the user who holds it. Intended for data loads and integration users. Grant it narrowly: it bypasses every package's logic on every object at once, including handlers that act as validation.</description>
+</CustomPermission>

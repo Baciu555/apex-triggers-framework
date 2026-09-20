@@ -1,12 +1,25 @@
 /**
- * Base class for all SObject trigger handlers.
+ * Base class for all SObject trigger handlers, in the one-handler-per-object
+ * style: the trigger constructs a handler subclass and calls run().
  *
  * Usage: create one trigger per SObject that does nothing but dispatch,
  * e.g. `trigger AccountTrigger on Account (before insert, after insert) { new AccountTriggerHandler().run(); }`,
  * and one handler per SObject that extends this class and overrides the
  * lifecycle methods it needs.
+ *
+ * WHICH FRAMEWORK TO USE: TriggerActionDispatcher is canonical for new work,
+ * and is what AccountTrigger uses. Prefer it whenever more than one feature or
+ * package needs to act on the same object, because it makes execution order an
+ * explicit metadata setting rather than a property of your class hierarchy.
+ * This class remains for handlers that genuinely own their object outright and
+ * want nothing more than a lifecycle base class.
+ *
+ * The two are independent: TriggerHandler.bypass() does not suppress a
+ * TriggerActionDispatcher action, and vice versa. They also read different
+ * metadata types - TriggerHandlerSetting__mdt here, TriggerActionBinding__mdt
+ * there. Don't register the same logic in both.
  */
-public virtual class TriggerHandler {
+public inherited sharing virtual class TriggerHandler {
     private static Map<String, LoopCount> loopCountMap = new Map<String, LoopCount>();
     private static Set<String> bypassedHandlers = new Set<String>();
 
@@ -178,7 +191,13 @@ public virtual class TriggerHandler {
         // Default toString() is "ClassName:[field=value, ...]" - the class name
         // is used as the bypass key and as the TriggerHandlerSetting__mdt DeveloperName.
         String repr = String.valueOf(this);
-        return repr.substring(0, repr.indexOf(':'));
+        Integer separator = repr.indexOf(':');
+
+        // A subclass that overrides toString() has no separator to split on.
+        // Falling back to the whole string keeps bypass and metadata lookup
+        // working off a stable key instead of throwing StringException from
+        // inside the constructor, which would make the handler unconstructible.
+        return separator > 0 ? repr.substring(0, separator) : repr;
     }
 
     protected virtual void beforeInsert() {

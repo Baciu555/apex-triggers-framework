@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Trigger Action Binding Access</label>
+    <description>Grants visibility into the Trigger Action Binding custom metadata type, used to register which handler classes run for which object, trigger context, and order under TriggerActionDispatcher.</description>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>TriggerActionBinding__mdt</name>
+    </customMetadataTypeAccesses>
+</PermissionSet>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Registers one TriggerAction handler class for one SObject and trigger context, with an explicit execution order. TriggerActionDispatcher reads these records instead of any package owning its own trigger, so multiple packages can add logic to the same object without an undefined execution order or a hardcoded dependency on each other.</description>
+    <label>Trigger Action Binding</label>
+    <pluralLabel>Trigger Action Bindings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

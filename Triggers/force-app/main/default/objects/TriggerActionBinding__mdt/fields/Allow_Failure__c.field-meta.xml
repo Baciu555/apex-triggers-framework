@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Failure__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>When checked, an exception thrown by this handler is logged and swallowed instead of aborting the save, so one package's optional logic cannot take down another package's record. The failure is retrievable in the same transaction via TriggerActionDispatcher.getFailures(). Leave unchecked for any handler whose logic the record must not be saved without - including validation. Note this also swallows registration errors such as a misspelled class name, which would otherwise fail loudly.</description>
+    <label>Allow Failure</label>
+    <type>Checkbox</type>
+</CustomField>

@@ -9,6 +9,12 @@ public class AccountNameNormalizer implements TriggerAction.BeforeInsert, Trigge
     public void beforeInsert(List<SObject> newList) {
         this.trimNames((List<Account>) newList);
     }
+// this should be deleted XDDD
+    public void XD() {
+    for (int i = 0; i < 100; i++) {
+        System.debug(i);
+}
+}
 
     public void beforeUpdate(List<SObject> newList, Map<Id, SObject> oldMap) {
         this.trimNames((List<Account>) newList);
